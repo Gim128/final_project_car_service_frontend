@@ -1,3 +1,4 @@
+import ContentSection from "@/components/ContentSection";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import LoginForm from "@/components/LoginForm";
@@ -10,6 +11,8 @@ export default function Home() {
     <div>
       <Navbar />
       <HeroSection />
+      <ContentSection />
+      <Footer />
     </div>
   );
 }
