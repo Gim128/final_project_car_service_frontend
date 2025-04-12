@@ -1,20 +1,26 @@
 'use client';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/';
-import { faL } from '@fortawesome/free-solid-svg-icons';
+// import { useAuth } from '../context/AuthContext';
+// import { faL } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangOpen, setIsLangOpen] = useState(false);
     const [selectedLang, setSelectedLang] = useState("ENG");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
   
     const languages = ["ENG", "SIN", "TAMIL"];
+
+    const handleLoginClick = () => {
+      navigate('/login');
+    };
   
     const toggleLogin = () => {
       setIsLoggedIn(!isLoggedIn);
@@ -72,8 +78,8 @@ const Navbar = () => {
                 </button>
               ) : (
                 <button 
+                  onClick={handleLoginClick}
                   className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                  onClick={toggleLogin}
                 >
                   Login
                 </button>
@@ -127,12 +133,13 @@ const Navbar = () => {
   
               {/* Mobile Login Button */}
               <button 
+                onClick={handleLoginClick}
                 className={`w-full px-4 py-2 rounded mt-2 ${
                   isLoggedIn 
                     ? "flex items-center justify-center space-x-1" 
                     : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
-                onClick={toggleLogin}
+                // onClick={toggleLogin}
               >
                 {isLoggedIn ? (
                   <>

@@ -1,10 +1,28 @@
+'use client';
+
 import React from 'react'
+import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons'
 
 const LoginForm = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your authentication logic here
+    login({ email, name: 'User' }); // Mock login
+    navigate('/');
+  };
+
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md'>
@@ -80,4 +98,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default LoginForm;

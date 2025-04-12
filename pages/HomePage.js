@@ -3,9 +3,11 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCar } from '@fortawesome/free-solid-svg-icons';
+import ContentSection from '@/components/ContentSection';
 
 const HomePage = () => {
   return (
+    <>
     <div className="relative bg-gray-100 py-16 md:py-24">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1480')] bg-cover bg-center opacity-10"></div>
@@ -59,6 +61,11 @@ const HomePage = () => {
         </div>
       </div>
     </div>
+    <ContentSection />
+    </>
+    
+
+    
   )
 }
 
