@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 import Navbar from '../components/Navbar'
