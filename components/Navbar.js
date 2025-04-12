@@ -1,6 +1,7 @@
-"use client"
+'use client';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
@@ -28,10 +29,10 @@ const Navbar = () => {
   
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="hover:text-blue-600">Home</a>
-              <a href="#" className="hover:text-blue-600">Post Ad</a>
-              <a href="#" className="hover:text-blue-600">All Ads</a>
-              <a href="#" className="hover:text-blue-600">Contact Us</a>
+              <Link to="/" className="hover:text-blue-600">Home</Link>
+              <Link to="#" className="hover:text-blue-600">Post Ad</Link>
+              <Link to="#" className="hover:text-blue-600">All Ads</Link>
+              <Link to="/contact" className="hover:text-blue-600">Contact Us</Link>
   
               {/* Language Dropdown */}
               <div className="relative">
