@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
 
@@ -16,12 +18,54 @@ const LoginForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const mockUsers = [
+    { email: 'user@example.com', password: 'password123', name: 'Demo User' },
+    { email: 'admin@example.com', password: 'admin123', name: 'Admin User' }
+  ];
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your authentication logic here
-    login({ email, name: 'User' }); // Mock login
-    navigate('/');
+    setIsLoading(true);
+
+    // login({ email, name: 'User' }); // Mock login
+    // navigate('/');
+
+    try {
+      // For production: Replace with real API call
+      // const response = await fetch('/api/auth/login', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ email, password })
+      // });
+      // const data = await response.json();
+      
+      // Mock authentication for development
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+      
+      const user = mockUsers.find(u => 
+        u.email === email && u.password === password
+      );
+
+      if (user) {
+        login({
+          email: user.email,
+          name: user.name,
+          token: 'mock-jwt-token', // In real app, this comes from API
+          role: email.includes('admin') ? 'admin' : 'user'
+        });
+        
+        toast.success('Login successful!');
+        navigate('/');
+      } else {
+        throw new Error('Invalid email or password');
+      }
+    } catch (error) {
+      toast.error(error.message || 'Login failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
+
 
   return (
     <div className='flex justify-center items-center min-h-screen'>
@@ -74,7 +118,8 @@ const LoginForm = () => {
 
         <p className='text-center mt-4 text-gray-600'>
           Don&apos;t have an account? 
-          <Link href="/" className='text-blue-600 hover:underline'>Sign Up</Link>
+          <Link href="/signup" 
+          className='text-blue-600 hover:underline'>Sign Up</Link>
         </p>
 
         <div className='mt-4'>
