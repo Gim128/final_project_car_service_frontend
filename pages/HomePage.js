@@ -59,7 +59,7 @@ const HomePage = () => {
             </a>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
     <ContentSection />
     </>

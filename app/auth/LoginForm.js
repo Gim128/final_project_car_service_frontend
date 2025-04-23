@@ -27,8 +27,8 @@ const LoginForm = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // login({ email, name: 'User' }); // Mock login
-    // navigate('/');
+    login({ email, name: 'User' }); // Mock login
+    navigate('/');
 
     try {
       // For production: Replace with real API call
@@ -83,6 +83,7 @@ const LoginForm = () => {
             <div>
               <input 
                 id='email' type='email' autoComplete='off'
+                onChange={onChange}
                 className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Enter Your Email'
               />
@@ -98,6 +99,7 @@ const LoginForm = () => {
             <div>
               <input 
                 id='password' type='password' autoComplete='off'
+                // onChange={onChange}
                 className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Enter Your Password'
               />
