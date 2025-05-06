@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -10,33 +10,46 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   // const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem('carportal_user');
+  //   if (storedUser) {
+  //     try {
+  //       setUser(JSON.parse(storedUser));
+  //     } catch (error) {
+  //       localStorage.removeItem('carportal_user');
+  //     }
+  //   }
+  //   setIsLoading(false);
+  // }, []);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const logout = useCallback(() => {
+      localStorage.removeItem('authToken');
+      setUser(null);
+      // navigate('/login');
+    });
+
   useEffect(() => {
-    const storedUser = localStorage.getItem('carportal_user');
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (error) {
-        localStorage.removeItem('carportal_user');
-      }
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      // Verify token and fetch user data
+      const fetchUser = async () => {
+        try {
+          // add API call to verify token and get user data
+          // const userData = await verifyToken(token);
+          // setUser(userData);
+        } catch (error) {
+          logout();
+        }
+      };
+      fetchUser();
     }
-    setIsLoading(false);
-  }, []);
+  }, [logout]);
 
-  const login = (userData) => {
-    const userWithTimestamp = {
-      ...userData,
-      loggedInAt: new Date().toISOString()
-    };
-    setUser(userWithTimestamp);
-    localStorage.setItem('carportal_user', JSON.stringify(userWithTimestamp));
-    return true;
-  };
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('carportal_user');
-    return true;
-    // navigate('/login');
+  const login = (token, userData) => {
+    localStorage.setItem('authToken', token);
+    setUser(userData);
+    // navigate('/account');
   };
 
   const isAuthenticated = () => !!user;

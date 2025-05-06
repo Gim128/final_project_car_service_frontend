@@ -10,6 +10,7 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { userLogin } from '@/utils/api';
 
 const LoginForm = () => {
 
@@ -18,17 +19,31 @@ const LoginForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const mockUsers = [
+    { email: 'test@gmail.com', password: 'test', name: 'Demo User' },
     { email: 'user@example.com', password: 'password123', name: 'Demo User' },
     { email: 'admin@example.com', password: 'admin123', name: 'Admin User' }
   ];
 
+  const handleLogin = async (e) => {
+    try {
+      const response = await userLogin(null);
+      console.log('User created:', response.data);
+    } catch (error) {
+      console.error('Error creating user:', error);
+    }
+  };
+
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     setIsLoading(true);
 
     login({ email, name: 'User' }); // Mock login
-    navigate('/');
+    // navigate('/');
 
     try {
       // For production: Replace with real API call
@@ -40,11 +55,13 @@ const LoginForm = () => {
       // const data = await response.json();
       
       // Mock authentication for development
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+      // await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+      await handleLogin()
       
-      const user = mockUsers.find(u => 
-        u.email === email && u.password === password
-      );
+      // const user = mockUsers.find(u => 
+      //   u.email === email && u.password === password
+      // );
+      const user = mockUsers[0];
 
       if (user) {
         login({
@@ -53,13 +70,14 @@ const LoginForm = () => {
           token: 'mock-jwt-token', // In real app, this comes from API
           role: email.includes('admin') ? 'admin' : 'user'
         });
-        
         toast.success('Login successful!');
         navigate('/');
       } else {
         throw new Error('Invalid email or password');
       }
     } catch (error) {
+      console.log(error);
+      
       toast.error(error.message || 'Login failed');
     } finally {
       setIsLoading(false);
@@ -73,7 +91,7 @@ const LoginForm = () => {
         <h2 className='text-3xl font-bold mb-6 text-center text-white'>
             <span className='bg-gradient-to-r text-transparent from-blue-500 to bg-purple-500 bg-clip-text'>Login</span>
         </h2>
-        <form>
+        <form onSubmit={handleSubmit} className='mb-4'>
           {/* email */}
           <div className='mb-6'>
             <label htmlFor='email' className='block text-gray-700 text-sm font-bold mb-2'>
@@ -83,7 +101,7 @@ const LoginForm = () => {
             <div>
               <input 
                 id='email' type='email' autoComplete='off'
-                onChange={onChange}
+                // onChange={onChange}
                 className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Enter Your Email'
               />

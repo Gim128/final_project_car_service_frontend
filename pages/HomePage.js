@@ -2,8 +2,9 @@
 // 'use client'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCar } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCar, faUser, faShop, faCarSide } from '@fortawesome/free-solid-svg-icons';
 import ContentSection from '@/components/ContentSection';
+import Link from 'next/link';
 
 const HomePage = () => {
   return (
@@ -44,18 +45,22 @@ const HomePage = () => {
           
           {/* Popular Searches */}
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <span className="text-gray-500">Popular:</span>
+            <span className="text-gray-500">Top Directories</span>
             <a href="#" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
-              <FontAwesomeIcon icon={faCar} className="mr-1" /> SUVs
+              <Link href="/BrokerDirectory">
+                <FontAwesomeIcon icon={faUser} className="mr-1" /> Brokers
+              </Link>
+            </a>
+            <a href="/Broker" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
+              <link href="/ServiceCenterDirectoryPage">
+                <FontAwesomeIcon icon={faCarSide} className="mr-1" /> Service Centers
+              </link>
             </a>
             <a href="#" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
-              <FontAwesomeIcon icon={faCar} className="mr-1" /> Sedans
+              <FontAwesomeIcon icon={faShop} className="mr-1" /> Shops
             </a>
             <a href="#" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
-              <FontAwesomeIcon icon={faCar} className="mr-1" /> Trucks
-            </a>
-            <a href="#" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
-              <FontAwesomeIcon icon={faCar} className="mr-1" /> Electric
+              <FontAwesomeIcon icon={faCar} className="mr-1" /> Buy Car
             </a>
           </div>
         </div>

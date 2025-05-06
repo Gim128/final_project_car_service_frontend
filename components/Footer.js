@@ -35,9 +35,9 @@ const Footer = () => {
             <div className='p-5'>
                 <ul>
                     <p className='text-gray-800 font-bold text-2xl pb-4'>Our Products</p>
-                    <li className='text-gray-500 text-md pb-2 font-medium hover:text-blue-600 cursor-pointer'>Loanfy</li>
-                    <li className='text-gray-500 text-md pb-2 font-medium hover:text-blue-600 cursor-pointer'>Celomart</li>
-                    <li className='text-gray-500 text-md pb-2 font-medium hover:text-blue-600 cursor-pointer'>Mobil1</li>
+                    <li className='text-gray-500 text-md pb-2 font-medium hover:text-blue-600 cursor-pointer'>Brokers</li>
+                    <li className='text-gray-500 text-md pb-2 font-medium hover:text-blue-600 cursor-pointer'>Service Centers</li>
+                    <li className='text-gray-500 text-md pb-2 font-medium hover:text-blue-600 cursor-pointer'>Spare Parts</li>
                     <li className='text-gray-500 text-md pb-2 font-medium hover:text-blue-600 cursor-pointer'>Calc</li>
                 </ul>
             </div>

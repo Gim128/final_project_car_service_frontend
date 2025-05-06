@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner, faCheckCircle, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { createUser } from '@/utils/api';
 
 const SignupForm = () => {
 
@@ -58,14 +59,21 @@ const SignupForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log('Form data:', e);
     e.preventDefault();
-    if (!validateForm()) return;
+    // if (!validateForm()) return;
     
     setIsSubmitting(true);
     setSubmitStatus(null);
 
 
     try {
+      formData.firstName = "Malinda"
+      formData.userName = "dilshan@gmail.com"
+      formData.lastName = "Dilshan"
+      formData.email = "dilshan@gmail.com"
+      formData.userType = 2
+      formData.password = "12345678"
       // Mock API call - replace with your actual signup endpoint
       const response = await mockSignupAPI(formData);
       
@@ -87,10 +95,20 @@ const SignupForm = () => {
     }
   };
 
+   const handleSignUp = async (data) => {
+      try {
+        const response = await createUser(data);
+        console.log('User created:', response.data);
+      } catch (error) {
+        console.error('Error creating user:', error);
+      }
+    };
+
   // Mock API function - replace with real API call
   const mockSignupAPI = async (data) => {
     // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // await new Promise(resolve => setTimeout(resolve, 1500));
+    await handleSignUp(data)
     
     // Mock validation - in real app, this would be server-side validation
     const users = JSON.parse(localStorage.getItem('users') || '[]');

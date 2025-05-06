@@ -39,7 +39,7 @@ const Navbar = () => {
               <Link to="#" className="hover:text-blue-600">Post Ad</Link>
               <Link to="#" className="hover:text-blue-600">All Ads</Link>
               <Link to="/contact" className="hover:text-blue-600">Contact Us</Link>
-              <Link to="/contact" className="hover:text-blue-600">Contact Us</Link>
+              {/* <Link to="/contact" className="hover:text-blue-600">Contact Us</Link> */}
   
               {/* Language Dropdown */}
               <div className="relative">
