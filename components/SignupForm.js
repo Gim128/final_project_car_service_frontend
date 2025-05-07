@@ -22,8 +22,8 @@ const SignupForm = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
+    setFormData(prevState => ({
+      ...prevState,
       [id]: value
     }));
     // Clear error when user types
@@ -68,14 +68,29 @@ const SignupForm = () => {
 
 
     try {
-      formData.firstName = "Malinda"
-      formData.userName = "dilshan@gmail.com"
-      formData.lastName = "Dilshan"
-      formData.email = "dilshan@gmail.com"
-      formData.userType = 2
-      formData.password = "12345678"
-      // Mock API call - replace with your actual signup endpoint
-      const response = await mockSignupAPI(formData);
+      // formData.firstName = "Malinda"
+      // formData.userName = "dilshan@gmail.com"
+      // formData.lastName = "Dilshan"
+      // formData.email = "dilshan@gmail.com"
+      // formData.userType = 2
+      // formData.password = "12345678"
+      // const response = await mockSignupAPI(formData);
+
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password
+        })
+      });
+
+      const data = await response.json();
+      console.log('Response data:', data);
       
       if (response.success) {
         setSubmitStatus('success');
@@ -145,9 +160,11 @@ const SignupForm = () => {
             <div className='mb-6'>
                 <div>
                     <input 
-                        id='firstName' type='text' autoComplete='off'
+                        id='firstName' type='text' autoComplete='on'
                         className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        value={formData.firstName}
                         placeholder='First Name'
+                        onChange={handleSubmit}
                     />
                 </div>
             </div>
@@ -155,9 +172,11 @@ const SignupForm = () => {
             <div className='mb-6'>
                 <div>
                     <input 
-                        id='lastName' type='text' autoComplete='off'
+                        id='lastName' type='text' autoComplete='on'
                         className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        value={formData.lastName}
                         placeholder='Last Name'
+                        onChange={handleSubmit}
                     />   
                 </div>
             </div>
@@ -165,9 +184,11 @@ const SignupForm = () => {
             <div className='mb-6'>
                 <div>
                 <input 
-                    id='email' type='email' autoComplete='off'
+                    id='email' type='email' autoComplete='on'
                     className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    value={formData.email}
                     placeholder='Email'
+                    onChange={handleSubmit}
                 />
                 </div>
             </div>
@@ -177,7 +198,9 @@ const SignupForm = () => {
                     <input 
                             id='password' type='password' autoComplete='off'
                             className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            value={formData.password}
                             placeholder='Password'
+                            onChange={handleSubmit}
                     />
                   </div>
             </div>
@@ -187,7 +210,9 @@ const SignupForm = () => {
                     <input 
                             id='password' type='password' autoComplete='off'
                             className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            value={formData.confirmPassword}
                             placeholder='Confirm Password'
+                            onChange={handleSubmit}
                     />
                   </div>
             </div>
