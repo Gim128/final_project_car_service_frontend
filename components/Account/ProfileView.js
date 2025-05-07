@@ -24,6 +24,10 @@ const ProfileView = () => {
     fetchProfile();
   }, []);
 
+  useEffect(() => {
+    console.log("inside profile");
+  },[])
+
   const handleSave = async () => {
     try {
       await updateProfile(profile);

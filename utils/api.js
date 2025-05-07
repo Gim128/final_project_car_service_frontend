@@ -14,7 +14,7 @@ const apiClient = axios.create({
 });
 
 // API functions
-export const userLogin = (data) => apiClient.post('/api/auth/login', {email:"dilshan@gmail.com", password: "12345678"});
+export const userLogin = (data) => apiClient.post('/api/auth/login', data);
 export const getUsers = () => apiClient.get('/users');
 export const getUserById = (id) => apiClient.get(`/users/${id}`);
 export const createUser = (data) => apiClient.post('/api/users', data);

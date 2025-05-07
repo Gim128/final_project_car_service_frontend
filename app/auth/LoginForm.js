@@ -11,6 +11,8 @@ import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { userLogin } from '@/utils/api';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const LoginForm = () => {
 
@@ -20,7 +22,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setErrors] = useState(null);
 
   const mockUsers = [
     { email: 'test@gmail.com', password: 'test', name: 'Demo User' },
@@ -28,61 +30,59 @@ const LoginForm = () => {
     { email: 'admin@example.com', password: 'admin123', name: 'Admin User' }
   ];
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (data) => {
     try {
-      const response = await userLogin(null);
-      console.log('User created:', response.data);
+      const response = await userLogin(data);
+      console.log('User created:', response?.data);
+      localStorage.setItem("token",response?.data?.accessToken);
+      return response;
     } catch (error) {
       console.error('Error creating user:', error);
+      return null;
     }
   };
 
-  const handleSubmit = async (e) => {
-    
-    e.preventDefault();
-    setIsLoading(true);
-
-    login({ email, name: 'User' }); // Mock login
-    // navigate('/');
-
-    try {
-      // For production: Replace with real API call
-      // const response = await fetch('/api/auth/login', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email, password })
-      // });
-      // const data = await response.json();
-      
-      // Mock authentication for development
-      // await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
-      await handleLogin()
-      
-      // const user = mockUsers.find(u => 
-      //   u.email === email && u.password === password
-      // );
-      const user = mockUsers[0];
-
-      if (user) {
-        login({
-          email: user.email,
-          name: user.name,
-          token: 'mock-jwt-token', // In real app, this comes from API
-          role: email.includes('admin') ? 'admin' : 'user'
-        });
-        toast.success('Login successful!');
-        navigate('/');
-      } else {
-        throw new Error('Invalid email or password');
-      }
-    } catch (error) {
-      console.log(error);
-      
-      toast.error(error.message || 'Login failed');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const formik = useFormik({
+      initialValues: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      },
+      validationSchema: Yup.object({
+        email: Yup.string().email('Invalid email').required('Email is required'),
+        password: Yup.string().min(6, 'At least 6 characters').required('Password is required'),
+      }),
+      onSubmit: (formData) => {
+        console.log('Submitted:', formData);
+        setIsLoading(true);
+  
+  
+        try {
+          let data = {
+            email: formData.email,
+            password: formData.password,
+          }
+          const response = handleLogin(data);
+  
+          if (response) {
+            // Redirect to login after 2 seconds
+            toast.success('Login Success');
+            setTimeout(() => {
+              navigate('/');
+            }, 2000);
+          } else {
+            setErrors({ api: response.message || 'Signup failed' });
+          }
+        } catch (error) {
+          console.log(error)
+          setError({ api: error.message || 'An error occurred during signup' });
+        } finally {
+          setIsLoading(false);
+        }
+      },
+    });
 
 
   return (
@@ -91,49 +91,49 @@ const LoginForm = () => {
         <h2 className='text-3xl font-bold mb-6 text-center text-white'>
             <span className='bg-gradient-to-r text-transparent from-blue-500 to bg-purple-500 bg-clip-text'>Login</span>
         </h2>
-        <form onSubmit={handleSubmit} className='mb-4'>
-          {/* email */}
+
+        <form onSubmit={formik.handleSubmit}>
+          {/* Email */}
           <div className='mb-6'>
-            <label htmlFor='email' className='block text-gray-700 text-sm font-bold mb-2'>
-            <FontAwesomeIcon icon={faEnvelope} className='mr-2 inline-block w-3.5'/>
-              Email
-            </label>
-            <div>
-              <input 
-                id='email' type='email' autoComplete='off'
-                // onChange={onChange}
-                className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                placeholder='Enter Your Email'
-              />
-            </div>
+            <input
+              name='email'
+              type='email'
+              placeholder='Email'
+              className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.email && formik.errors.email && (
+              <div className='text-red-500 text-sm mt-1'>{formik.errors.email}</div>
+            )}
           </div>
 
-          {/* password */}
+          {/* Password */}
           <div className='mb-6'>
-            <label htmlFor='password' className='block text-gray-700 text-sm font-bold mb-2'>
-            <FontAwesomeIcon icon={faLock} className='mr-2 inline-block w-3.5'/>
-              Password
-            </label>
-            <div>
-              <input 
-                id='password' type='password' autoComplete='off'
-                // onChange={onChange}
-                className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                placeholder='Enter Your Password'
-              />
-            </div>
+            <input
+              name='password'
+              type='password'
+              placeholder='Password'
+              className='shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.password && formik.errors.password && (
+              <div className='text-red-500 text-sm mt-1'>{formik.errors.password}</div>
+            )}
           </div>
 
-          <div className='flex items-center justify-center '>
-            <button type='submit' className='bg-gradient-to-r from-blue-500 to-blue-700 hover:from-purple-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full'>
-              LOGIN
+          {/* Submit */}
+          <div className='flex items-center justify-center'>
+            <button
+              type='submit'
+              className='bg-gradient-to-r from-blue-500 to-blue-700 hover:from-purple-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full'
+            >
+              Login
             </button>
           </div>
-
-          <div className='text-center mt-4'>
-            <Link href="/" className='text-gray-600 hover:underline'>Forgot Password</Link>
-          </div>
-
         </form>
 
         <p className='text-center mt-4 text-gray-600'>

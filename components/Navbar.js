@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,6 +25,17 @@ const Navbar = () => {
     const toggleLogin = () => {
       setIsLoggedIn(!isLoggedIn);
     };
+
+    useEffect (() => {
+      let token = localStorage.getItem("token")
+      if(token) {
+        toggleLogin();
+      }
+    },[])
+
+    function gotoProfile () {
+      navigate("/profile")
+    }
   
     return (
       <nav className="bg-white shadow-md">
@@ -72,7 +83,7 @@ const Navbar = () => {
               {isLoggedIn ? (
                 <button 
                   className="flex items-center space-x-1"
-                  onClick={toggleLogin}
+                  onClick={gotoProfile}
                 >
                   <FontAwesomeIcon icon={faUser} className="text-blue-600" />
                   <span>Profile</span>

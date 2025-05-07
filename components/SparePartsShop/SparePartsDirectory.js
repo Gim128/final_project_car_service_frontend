@@ -1,6 +1,7 @@
 // src/components/SpareParts/SparePartsDirectory.jsx
 import React, { useState } from 'react';
-import SparePartsShopCard from './SparePartsShopCard';
+import SparePartsShopCard from './SparePartsCard';
+// import SparePartsShopCard from './SparePartsShopCard';
 
 const SparePartsDirectory = () => {
   // Hardcoded shop data with image placeholders

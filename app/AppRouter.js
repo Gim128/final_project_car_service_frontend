@@ -10,6 +10,7 @@ import HomePage from "@/pages/HomePage";
 import Image from "next/image";
 import { Routes, Route } from "react-router-dom";
 import AccountPage from "@/pages/AccountPage";
+import ProfileView from "@/components/Account/ProfileView";
 
 export default function AppRouter() {
   return (
@@ -19,7 +20,7 @@ export default function AppRouter() {
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/contact" element={<ContactUs />} />
-        <Route path="/profile" element={<AccountPage />} />
+        <Route path="/profile" element={<ProfileView />} />
       </Routes>
 
   );
