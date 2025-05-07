@@ -7,6 +7,7 @@ import ContactUsPage from '@/pages/ContactUsPage';
 import LoginForm from '@/app/auth/LoginForm';
 import SignupForm from '@/components/SignupForm';
 import { useAuth } from '../context/AuthContext';
+import ProfileView from "@/components/Account/ProfileView";
 
 const ClientApp = () => {
 
@@ -21,6 +22,7 @@ const ClientApp = () => {
           <Route path="/contact" element={<ContactUsPage />} />
           <Route path="/login" element={!isLoggedIn ? <LoginForm /> : <Navigate to="/" />} />
           <Route path="/signup" element={<SignupForm />} />
+          <Route path="/profile" element={<ProfileView />} />
         </Routes>
       </main>
       <Footer />

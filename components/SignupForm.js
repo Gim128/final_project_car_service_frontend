@@ -1,16 +1,14 @@
 import React from 'react'
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner, faCheckCircle, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { createUser } from '@/utils/api';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import {useNavigate} from "react-router-dom";
 
 const SignupForm = () => {
 
-  const router = useRouter();
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // null, 'success', or 'error'
@@ -63,7 +61,7 @@ const SignupForm = () => {
           setSubmitStatus('success');
           // Redirect to login after 2 seconds
           setTimeout(() => {
-            router.push('/login');
+            navigate("/login")
           }, 2000);
         } else {
           setSubmitStatus('error');

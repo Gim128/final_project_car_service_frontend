@@ -1,17 +1,13 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { BrowserRouter as Router } from 'react-router-dom';
-import AppTemplate from './AppRouter';
 import { AuthProvider } from '@/context/AuthContext';
 import "./globals.css";
 
 
 const ClientApp = dynamic(
   () => import('./ClientApp'),
-  { ssr: false, loading: () => <div className="min-h-screen flex items-center justify-center">Loading...</div> }
+  // { ssr: false, loading: () => <div className="min-h-screen flex items-center justify-center">Loading...</div> }
 );
 
 export default function RootLayout({ children }) {

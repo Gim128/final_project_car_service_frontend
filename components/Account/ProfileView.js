@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { getUserProfile, updateProfile } from '../../services/userService';
+// import { getUserProfile, updateProfile } from '../../services/userService';
 import Button from '../UI/Button';
 import InputField from '../UI/InputField';
 import { toast } from 'react-toastify';
+import {getUserProfile} from "@/utils/api";
 
 const ProfileView = () => {
   const [profile, setProfile] = useState({
@@ -46,17 +47,17 @@ const ProfileView = () => {
         <div className="space-y-4">
           <InputField
             label="Name"
-            value={profile.name}
+            value={profile?.name}
             onChange={(e) => setProfile({...profile, name: e.target.value})}
           />
           <InputField
             label="Location"
-            value={profile.location}
+            value={profile?.location}
             onChange={(e) => setProfile({...profile, location: e.target.value})}
           />
           <InputField
             label="Mobile"
-            value={profile.mobile}
+            value={profile?.mobile}
             onChange={(e) => setProfile({...profile, mobile: e.target.value})}
           />
           <div className="flex space-x-4">
@@ -65,21 +66,23 @@ const ProfileView = () => {
           </div>
         </div>
       ) : (
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-lg font-medium">Name</h3>
-            <p>{profile.name}</p>
+          <div className="space-y-6">
+            <div>
+              <div>
+                <h3 className="text-lg font-medium">Name</h3>
+                <p>{profile?.name}</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-medium">Location</h3>
+                <p>{profile?.location}</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-medium">Mobile</h3>
+                <p>{profile?.mobile}</p>
+              </div>
+              <Button onClick={() => setIsEditing(true)}>Edit</Button>
+            </div>
           </div>
-          <div>
-            <h3 className="text-lg font-medium">Location</h3>
-            <p>{profile.location}</p>
-          </div>
-          <div>
-            <h3 className="text-lg font-medium">Mobile</h3>
-            <p>{profile.mobile}</p>
-          </div>
-          <Button onClick={() => setIsEditing(true)}>Edit</Button>
-        </div>
       )}
     </div>
   );
