@@ -9,6 +9,7 @@ import AccountPage from '@/pages/AccountPage';
 import BrokerDirectoryPage from '../pages/BrokerDirectoryPage';
 import ServiceCenterDirectoryPage from '@/pages/ServiceCenterDirectoryPage';
 import SparePartsDirectoryPage from '@/pages/SparePartsDirectoryPage';
+import AddVehiclePage from '@/pages/AddVehiclePage';
 
 
 const HomePage = dynamic(() => import('../pages/HomePage'), { ssr: false });
@@ -26,6 +27,7 @@ export default function App() {
       <Route path="/brokers" element={<BrokerDirectoryPage />} />
       <Route path="/service-centers" element={<ServiceCenterDirectoryPage />} />
       <Route path="/spare-parts" element={<SparePartsDirectoryPage />} />
+      <Route path="/add-vehicle" element={<AddVehiclePage />} />
 
       <Route element={<PrivateRoute />}>
         <Route path="/profile" element={<AccountPage/>} />
