@@ -25,9 +25,10 @@ export default function App() {
       <Route path="/contact" element={<ContactUsPage />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/signup" element={<SignupForm />} />
-      <Route path="/brokers" element={<BrokerDirectoryPage />} />
-      <Route path="/service-centers" element={<ServiceCenterDirectoryPage />} />
-      <Route path="/spare-parts" element={<SparePartsDirectoryPage />} />
+      {/* <Route path="/brokers" element={<BrokerDirectoryPage />} /> */}
+      <Route path="/servicecentersdirectorypage" element={<ServiceCenterDirectoryPage />} />
+      <Route path="/brokerdirectorypage " element={<BrokerDirectoryPage />} />
+      <Route path="/sparepartsdirectorypage" element={<SparePartsDirectoryPage />} />
       <Route path="/add-vehicle" element={<AddVehiclePage />} />
       <Route path="/profile" element={<ProfileView/>} />
 

@@ -43,27 +43,22 @@ const HomePage = () => {
             </button>
           </div>
           
-          {/* Popular Searches */}
+
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <span className="text-gray-500">Top Directories</span>
-            {/* <a href="#" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
-            <FontAwesomeIcon icon={faUser} className="mr-1" /> Brokers
-            </a> */}
-            <Link href="/BrokerDirectory">
+            
+            <Link href="/BrokerDirectoryPage" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
                 <FontAwesomeIcon icon={faUser} className="mr-1" /> Brokers
-              </Link>
-            {/* <a href="/Broker" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
-            <FontAwesomeIcon icon={faCarSide} className="mr-1" /> Service Centers
-            </a> */}
-             <Link href="/ServiceCenterDirectoryPage">
+            </Link>
+            
+            <Link href="/ServiceCenterDirectoryPage" className='px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300'>
                 <FontAwesomeIcon icon={faCarSide} className="mr-1" /> Service Centers
-              </Link>
-            <a href="#" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
+            </Link>
+            
+            <Link href="/SparePartsDirectoryPage" className='px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300'>
               <FontAwesomeIcon icon={faShop} className="mr-1" /> Shops
-            </a>
-            <a href="#" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
-              <FontAwesomeIcon icon={faCar} className="mr-1" /> Buy Car
-            </a>
+            </Link>
+            
           </div>
         </div>
       </div> 

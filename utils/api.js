@@ -1,7 +1,7 @@
 // src/api/api.js
 import axios from 'axios';
 
-const BASE_URL = 'http://192.168.102.215:9090'; // Replace with your API base URL
+const BASE_URL = 'http://192.168.1.20:9090'; // Replace with your API base URL
 
 // Set up axios instance (optional but good practice)
 const apiClient = axios.create({

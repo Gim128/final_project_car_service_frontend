@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,11 +16,13 @@ const Navbar = () => {
     const [selectedLang, setSelectedLang] = useState("ENG");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
+    // const router = useRouter();
   
     const languages = ["ENG", "SIN", "TAMIL"];
 
     const handleLoginClick = () => {
       navigate('/login');
+      // router.push('/login');
     };
   
     const toggleLogin = () => {
