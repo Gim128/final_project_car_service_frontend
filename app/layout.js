@@ -7,7 +7,7 @@ import "./globals.css";
 
 const ClientApp = dynamic(
   () => import('./ClientApp'),
-  // { ssr: false, loading: () => <div className="min-h-screen flex items-center justify-center">Loading...</div> }
+  { ssr: false, loading: () => <div className="min-h-screen flex items-center justify-center">Loading...</div> }
 );
 
 export default function RootLayout({ children }) {
