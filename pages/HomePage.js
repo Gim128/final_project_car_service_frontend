@@ -48,11 +48,11 @@ const HomePage = () => {
             <span className="text-gray-500">Top Directories</span>
             
             <Link href="/BrokerDirectoryPage" className="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300">
-                <FontAwesomeIcon icon={faUser} className="mr-1" /> Brokers
+                <FontAwesomeIcon icon={faUser} className="mr-1" /> Service Centers
             </Link>
             
             <Link href="/ServiceCenterDirectoryPage" className='px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300'>
-                <FontAwesomeIcon icon={faCarSide} className="mr-1" /> Service Centers
+                <FontAwesomeIcon icon={faCarSide} className="mr-1" /> Brokers
             </Link>
             
             <Link href="/SparePartsDirectoryPage" className='px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300'>

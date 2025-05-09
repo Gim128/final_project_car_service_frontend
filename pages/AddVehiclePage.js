@@ -4,8 +4,7 @@ import React from 'react'
 
 const AddVehiclePage = () => {
   return (
-    <div className='min-h-screen bg-gray-50'>
-      <Navbar />
+    <div className='flex flex-col bg-gray-50'>
       <AddVehicleForm />
     </div>
   );

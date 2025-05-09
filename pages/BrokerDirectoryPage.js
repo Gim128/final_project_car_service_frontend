@@ -4,8 +4,8 @@ import React from 'react'
 
 const BrokerDirectoryPage = () => {
   return (
-    <div className='min-h-screen bg-gray-50'>
-      <Navbar />
+    <div className='flex flex-col bg-gray-50'>
+      {/* <Navbar /> */}
       <BrokerDirectory />
     </div>
   );

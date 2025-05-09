@@ -50,7 +50,7 @@ const Navbar = () => {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
               <Link to="/" className="hover:text-blue-600">Home</Link>
-              <Link to="#" className="hover:text-blue-600">Post Ad</Link>
+              <Link to="/AddVehiclePage" className="hover:text-blue-600">Post Ad</Link>
               <Link to="#" className="hover:text-blue-600">All Ads</Link>
               <Link to="/contact" className="hover:text-blue-600">Contact Us</Link>
               {/* <Link to="/contact" className="hover:text-blue-600">Contact Us</Link> */}

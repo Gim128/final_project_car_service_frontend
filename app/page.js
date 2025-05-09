@@ -23,6 +23,7 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
       {/* <Route path="/" element={<PostAd />} /> */}
       <Route path="/contact" element={<ContactUsPage />} />
+      <Route path="/post-ad" element={<AddVehiclePage />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/signup" element={<SignupForm />} />
       {/* <Route path="/brokers" element={<BrokerDirectoryPage />} /> */}
